@@ -38,46 +38,46 @@ class Film
   end
 
   def delete
-    sql = "DELETE FROM movies WHERE id = $1"
+    sql = "DELETE FROM films WHERE id = $1"
     values = [@id]
     SqlRunner.run(sql, values)
   end
 
   def update
-    sql = "UPDATE movies
-    SET (title, genre, budget)
-    = ($1, $2, $3)
-    WHERE id = $4;"
-    values = [@title, @genre, @budget, @id]
+    sql = "UPDATE films
+    SET (title, price)
+    = ($1, $2)
+    WHERE id = $3;"
+    values = [@title, @price, @id]
     SqlRunner.run(sql, values)
   end
 
-  def stars
-    sql = "SELECT stars.*
-    FROM stars
-    INNER JOIN castings
-    ON castings.movie_id = stars.id
-    WHERE castings.movie_id = $1;"
-    values = [@id]
-    stars = SqlRunner.run(sql, values)
-    return Star.map_items(stars)
-  end
+  # def customers
+  #   sql = "SELECT customers.*
+  #   FROM stars
+  #   INNER JOIN castings
+  #   ON castings.movie_id = stars.id
+  #   WHERE castings.movie_id = $1;"
+  #   values = [@id]
+  #   stars = SqlRunner.run(sql, values)
+  #   return Star.map_items(stars)
+  # end
 
 # preferable to convert to ruby objects and then use the objects to get data
 # avoids fiddling with sql and also provides objects for further use
-  def net_budget
-    sql = "SELECT castings.fee
-    FROM stars
-    INNER JOIN castings
-    ON castings.movie_id = stars.id
-    WHERE castings.movie_id = $1;"
-    values = [@id]
-    fees = SqlRunner.run(sql, values)
-    total = @budget
-    for fee in fees
-      total -= fee["fee"].to_i
-    end
-    return total
-  end
+  # def net_budget
+  #   sql = "SELECT castings.fee
+  #   FROM stars
+  #   INNER JOIN castings
+  #   ON castings.movie_id = stars.id
+  #   WHERE castings.movie_id = $1;"
+  #   values = [@id]
+  #   fees = SqlRunner.run(sql, values)
+  #   total = @budget
+  #   for fee in fees
+  #     total -= fee["fee"].to_i
+  #   end
+  #   return total
+  # end
 
 end
