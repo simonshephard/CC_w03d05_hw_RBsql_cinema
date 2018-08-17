@@ -26,10 +26,10 @@ films = (1..num_films).map do |i|
 end
 (1..num_films).each {|i| films[i-1].save}
 
-print films
+# print films
 
 screenings = (1..num_screenings).map do |i|
-  Screening.new({'screen' => i, 'time' => (12+i).to_s + ":00", 'capacity' => 10*i, 'film_id' => films[i-1].id})
+  Screening.new({'screen' => i, 'start_time' => (12+i).to_s + ":00", 'capacity' => 10*i, 'film_id' => films[i-1].id})
 end
 (1..num_screenings).each {|i| screenings[i-1].save}
 

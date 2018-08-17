@@ -52,32 +52,24 @@ class Film
     SqlRunner.run(sql, values)
   end
 
-  # def customers
-  #   sql = "SELECT customers.*
-  #   FROM stars
-  #   INNER JOIN castings
-  #   ON castings.movie_id = stars.id
-  #   WHERE castings.movie_id = $1;"
-  #   values = [@id]
-  #   stars = SqlRunner.run(sql, values)
-  #   return Star.map_items(stars)
-  # end
+  def customers
+    sql = "SELECT customers.*
+    FROM customers
+    INNER JOIN tickets
+    ON tickets.customer_id = customers.id
+    INNER JOIN screenings
+    ON tickets.screening_id = screenings.id
+    WHERE screenings.film_id = $1;"
+    values = [@id]
+    items = SqlRunner.run(sql, values)
+    return Customer.map_items(items)
+  end
 
-# preferable to convert to ruby objects and then use the objects to get data
-# avoids fiddling with sql and also provides objects for further use
-  # def net_budget
-  #   sql = "SELECT castings.fee
-  #   FROM stars
-  #   INNER JOIN castings
-  #   ON castings.movie_id = stars.id
-  #   WHERE castings.movie_id = $1;"
-  #   values = [@id]
-  #   fees = SqlRunner.run(sql, values)
-  #   total = @budget
-  #   for fee in fees
-  #     total -= fee["fee"].to_i
-  #   end
-  #   return total
-  # end
+  def count_customers
+    results = customers
+    results.length
+  end
+
+
 
 end

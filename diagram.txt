@@ -48,14 +48,14 @@ Methods
 
 
 
-CRUD actions (create(save), read(all or find by name/id for individual), update(update), delete(delete)) customers, films and tickets.
-
+DONECRUD actions (create(save), read(all or find by name/id for individual), update(update), delete(delete)) customers, films and tickets.
+-not done find by name or ID
 
 Basic extensions:
 
 Buying tickets should decrease the funds of the customer by the price
-Check how many tickets were bought by a customer
-Check how many customers are going to watch a certain film
+DONECheck how many tickets were bought by a customer
+DONECheck how many customers are going to watch a certain film
 
 Advanced extensions:
 

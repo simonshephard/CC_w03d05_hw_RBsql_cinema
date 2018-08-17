@@ -2,7 +2,7 @@ require_relative("../db/sql_runner")
 
 class Screening
 
-  attr_accessor :screen, :time, :capacity, :film_id
+  attr_accessor :screen, :start_time, :capacity, :film_id
   attr_reader :id
 
   def initialize(details)

@@ -58,11 +58,40 @@ class Customer
     INNER JOIN screenings
     ON screenings.film_id = films.id
     INNER JOIN tickets
-    ON tickets.customer_id = screenings.id
+    ON tickets.screening_id = screenings.id
     WHERE tickets.customer_id = $1;"
     values = [@id]
     items = SqlRunner.run(sql, values)
     return Film.map_items(items)
+  end
+
+  def tickets
+    sql = "SELECT tickets.*
+    FROM tickets
+    INNER JOIN customers
+    ON tickets.customer_id = customers.id
+    WHERE tickets.customer_id = $1;"
+    values = [@id]
+    items = SqlRunner.run(sql, values)
+    return Ticket.map_items(items)
+  end
+
+  def count_tickets
+    results = tickets
+    results.length
+  end
+
+  def buy_ticket(screening)
+    sql = "SELECT films.*
+    FROM films
+    INNER JOIN screenings
+    ON screenings.film_id = films.id
+    WHERE film_id = $1;"
+    values = [screening.film_id]
+    items = SqlRunner.run(sql, values)
+    film = Film.map_items(items).first
+    @funds -= film.price
+    # should also add code to generate a new ticket for film / screening / customer
   end
 
 
