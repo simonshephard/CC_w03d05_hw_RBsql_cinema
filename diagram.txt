@@ -53,25 +53,23 @@ DONECRUD actions (create(save), read(all or find by name/id for individual), upd
 
 Basic extensions:
 
-Buying tickets should decrease the funds of the customer by the price
+DONEBuying tickets should decrease the funds of the customer by the price
 DONECheck how many tickets were bought by a customer
 DONECheck how many customers are going to watch a certain film
 
 Advanced extensions:
 
-Create a screenings table that lets us know what time films are showing
-TIME
-SCREENING JOINS FILMS TO TIME
-EXTEND TICKET??
-NO
-SCREENING LINKS FILM TO TIMES
-THEN TICKET LINKS CUSTOMER TO SCREENING
-
-
-
+DONECreate a screenings table that lets us know what time films are showing
 Write a method that finds out what is the most popular time (most tickets sold) for a given film
-Limit the available tickets for screenings.
 
+CLASS METHOD ON FILM
+FILM.all - FOR EACH FILM IN ALL
+-GET TICKETS
+-COUNT TICKETS
+RETURN MAX AND FILM
+
+Limit the available tickets for screenings.
+CHECK CAPACITY BEFORE SELLING TICKET
 
 
 

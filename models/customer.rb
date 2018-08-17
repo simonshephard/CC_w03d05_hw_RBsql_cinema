@@ -92,6 +92,7 @@ class Customer
     film = Film.map_items(items).first
     @funds -= film.price
     # should also add code to generate a new ticket for film / screening / customer
+    # and update database
   end
 
 
