@@ -23,32 +23,32 @@ class Ticket
   end
 
   def self.map_items(data)
-    data.map{|item| Casting.new(item)}
+    data.map{|item| Ticket.new(item)}
   end
 
   def self.all
-    sql = "SELECT * FROM castings"
+    sql = "SELECT * FROM tickets"
     result = SqlRunner.run(sql)
-    Casting.map_items(result)
+    Ticket.map_items(result)
   end
 
   def self.delete_all
-    sql = "DELETE FROM castings"
+    sql = "DELETE FROM tickets"
     SqlRunner.run(sql)
   end
 
   def delete
-    sql = "DELETE FROM castings WHERE id = $1"
+    sql = "DELETE FROM tickets WHERE id = $1"
     values = [@id]
     SqlRunner.run(sql, values)
   end
 
   def update
-    sql = "UPDATE castings
-    SET (movie_id, star_id, fee)
-    = ($1, $2, $3)
-    WHERE id = $4;"
-    values = [@movie_id, @star_id, @fee, @id]
+    sql = "UPDATE tickets
+    SET (customer_id, screening_id)
+    = ($1, $2)
+    WHERE id = $3;"
+    values = [@customer_id, @screening_id, @id]
     SqlRunner.run(sql, values)
   end
 
