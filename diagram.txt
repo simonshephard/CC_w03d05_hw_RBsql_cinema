@@ -25,16 +25,6 @@ Methods
 -film.customers
 
 
-TICKET OBJECT
-
-Properties
--customer_id
--screening_id
-
-Methods
--initialize
-
-
 SCREENING OBJECT
 
 Properties
@@ -47,8 +37,18 @@ Methods
 -initialize
 
 
+TICKET OBJECT
 
-CRUD actions (create(save), read(??), update(update), delete(delete)) customers, films and tickets.
+Properties
+-customer_id
+-screening_id
+
+Methods
+-initialize
+
+
+
+CRUD actions (create(save), read(all or find by name/id for individual), update(update), delete(delete)) customers, films and tickets.
 
 
 Basic extensions:
