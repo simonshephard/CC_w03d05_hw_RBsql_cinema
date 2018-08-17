@@ -14,43 +14,43 @@ class Ticket
   end
 
   def save()
-    sql = "INSERT INTO tickets
-    (customer_id, screening_id)
+    sql = "INSERT INTO screenings
+    (screen, time, capacity, film_id)
     VALUES
-    ($1, $2)
+    ($1, $2, $3, $4)
     RETURNING id"
-    values = [@customer_id, @screening_id]
+    values = [@screen, @time, @capacity, @film_id]
     result = SqlRunner.run(sql, values).first
     @id = result['id'].to_i
   end
 
   def self.map_items(data)
-    data.map{|item| Ticket.new(item)}
+    data.map{|item| Screening.new(item)}
   end
 
   def self.all
-    sql = "SELECT * FROM tickets"
+    sql = "SELECT * FROM screenings"
     result = SqlRunner.run(sql)
-    Ticket.map_items(result)
+    Screening.map_items(result)
   end
 
   def self.delete_all
-    sql = "DELETE FROM tickets"
+    sql = "DELETE FROM screenings"
     SqlRunner.run(sql)
   end
 
   def delete
-    sql = "DELETE FROM tickets WHERE id = $1"
+    sql = "DELETE FROM screenings WHERE id = $1"
     values = [@id]
     SqlRunner.run(sql, values)
   end
 
   def update
-    sql = "UPDATE tickets
-    SET (customer_id, screening_id)
-    = ($1, $2)
-    WHERE id = $3;"
-    values = [@customer_id, @screening_id, @id]
+    sql = "UPDATE screenings
+    SET (screen, time, capacity, film_id)
+    = ($1, $2, $3, $4)
+    WHERE id = $5;"
+    values = [@screen, @time, @capacity, @film_id, @id]
     SqlRunner.run(sql, values)
   end
 
