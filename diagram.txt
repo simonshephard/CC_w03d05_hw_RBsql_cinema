@@ -49,20 +49,22 @@ Methods
 
 
 DONECRUD actions (create(save), read(all or find by name/id for individual), update(update), delete(delete)) customers, films and tickets.
--not done find by name or ID
+***-not done find by name or ID
 
 Basic extensions:
 
 DONEBuying tickets should decrease the funds of the customer by the price
+TESTED
 DONECheck how many tickets were bought by a customer
+TESTED
 DONECheck how many customers are going to watch a certain film
 
 Advanced extensions:
 
 DONECreate a screenings table that lets us know what time films are showing
 DONEWrite a method that finds out what is the most popular time (most tickets sold) for a given film
-Limit the available tickets for screenings.
-
+DONELimit the available tickets for screenings.
+TESTED
 
 
 ORIGINAL SPEC

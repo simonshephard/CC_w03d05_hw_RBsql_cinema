@@ -41,13 +41,13 @@ screening10 = Screening.new({'screen' => 1, 'start_time' => (12).to_s + ":00", '
 screening10.save
 screening11 = Screening.new({'screen' => 1, 'start_time' => (14).to_s + ":00", 'capacity' => 5, 'film_id' => films[0].id})
 screening11.save
-# 5 tickets to s100
+# 5 tickets to s100 - no spare capacity
 Ticket.new({'customer_id' => customers[0].id, 'screening_id' => screening10.id}).save
 Ticket.new({'customer_id' => customers[0].id, 'screening_id' => screening10.id}).save
 Ticket.new({'customer_id' => customers[0].id, 'screening_id' => screening10.id}).save
 Ticket.new({'customer_id' => customers[0].id, 'screening_id' => screening10.id}).save
 Ticket.new({'customer_id' => customers[0].id, 'screening_id' => screening10.id}).save
-# 3 tickets to s101
+# 3 tickets to s101 - 2 tickets spare capacity
 Ticket.new({'customer_id' => customers[0].id, 'screening_id' => screening11.id}).save
 Ticket.new({'customer_id' => customers[0].id, 'screening_id' => screening11.id}).save
 Ticket.new({'customer_id' => customers[0].id, 'screening_id' => screening11.id}).save

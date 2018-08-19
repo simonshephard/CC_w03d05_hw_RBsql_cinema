@@ -11,7 +11,7 @@ class Ticket
     @screening_id = details['screening_id'].to_i
   end
 
-  def save()
+  def save
     sql = "INSERT INTO tickets
     (customer_id, screening_id)
     VALUES

@@ -11,7 +11,7 @@ class Film
     @price = details['price'].to_i
   end
 
-  def save()
+  def save
     sql = "INSERT INTO films
     (title, price)
     VALUES
@@ -66,8 +66,7 @@ class Film
   end
 
   def customer_count
-    results = customers
-    results.length
+    customers.length
   end
 
   def screenings
@@ -80,10 +79,7 @@ class Film
   end
 
   def most_popular_screening
-    most_popular = screenings.max_by {|screening| screening.count_tickets}
+    screenings.max_by {|screening| screening.count_tickets}
   end
-
-
-
 
 end

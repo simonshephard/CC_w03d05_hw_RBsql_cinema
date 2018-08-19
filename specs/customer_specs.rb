@@ -65,16 +65,30 @@ class CustomerTest < Minitest::Test
     assert_equal(99, @customers[0].funds)
   end
 
-  def test_buy_ticket__no_change_funds_at_capacity
+  def test_buy_ticket__increase_ticket_count_by_1
+    count = @customers[0].ticket_count
+    @customers[0].buy_ticket(@screenings[0])
+    assert_equal(count+1, @customers[0].ticket_count)
+  end
+
+  def test_buy_ticket__at_capacity_no_sale_no_change_funds
     @customers[0].buy_ticket(@screening100)
     assert_equal(100, @customers[0].funds)
   end
 
+  def test_buy_ticket__at_capacity_no_sale_no_change_ticket_count
+    count = @customers[0].ticket_count
+    @customers[0].buy_ticket(@screening100)
+    assert_equal(count, @customers[0].ticket_count)
+  end
+
   def test_buy_ticket__try_to_buy_3_only_get_2
+    count = @customers[0].ticket_count
     @customers[0].buy_ticket(@screening101)
     @customers[0].buy_ticket(@screening101)
     @customers[0].buy_ticket(@screening101)
     assert_equal(98, @customers[0].funds)
+    assert_equal(count+2, @customers[0].ticket_count)
   end
 
 end

@@ -57,7 +57,7 @@ class Screening
   def tickets
     sql = "SELECT tickets.*
     FROM tickets
-    WHERE tickets.screening_id = $1;"
+    WHERE tickets.screening_id = $1"
     values = [@id]
     items = SqlRunner.run(sql, values)
     return Ticket.map_items(items)
@@ -66,6 +66,5 @@ class Screening
   def ticket_count
     tickets.length
   end
-
 
 end

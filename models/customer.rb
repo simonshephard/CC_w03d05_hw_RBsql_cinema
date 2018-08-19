@@ -43,7 +43,7 @@ class Customer
     SqlRunner.run(sql, values)
   end
 
-  def update()
+  def update
     sql = "UPDATE customers
     SET (name, funds)
     = ($1, $2)
@@ -76,7 +76,7 @@ class Customer
     return Ticket.map_items(items)
   end
 
-  def count_tickets
+  def ticket_count
     tickets.length
   end
 
@@ -95,7 +95,7 @@ class Customer
       new_ticket = Ticket.new({'customer_id' => @id, 'screening_id' => screening.id})
       new_ticket.save
     else
-      return "Screening at capacity"
+      return "No sale - screening at capacity"
     end
   end
 
