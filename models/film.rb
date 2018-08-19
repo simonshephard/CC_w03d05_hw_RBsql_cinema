@@ -8,7 +8,7 @@ class Film
   def initialize(details)
     @id = details['id'].to_i if details['id']
     @title = details['title']
-    @price = details['price']
+    @price = details['price'].to_i
   end
 
   def save()
@@ -65,10 +65,24 @@ class Film
     return Customer.map_items(items)
   end
 
-  def count_customers
+  def customer_count
     results = customers
     results.length
   end
+
+  def screenings
+    sql = "SELECT screenings.*
+    FROM screenings
+    WHERE screenings.film_id = $1;"
+    values = [@id]
+    items = SqlRunner.run(sql, values)
+    Screening.map_items(items)
+  end
+
+  def most_popular_screening
+    most_popular = screenings.max_by {|screening| screening.count_tickets}
+  end
+
 
 
 

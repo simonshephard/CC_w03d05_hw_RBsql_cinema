@@ -7,10 +7,10 @@ class Screening
 
   def initialize(details)
     @id = details['id'].to_i if details['id']
-    @screen = details['screen']
+    @screen = details['screen'].to_i
     @start_time = details['start_time']
-    @capacity = details['capacity']
-    @film_id = details['film_id']
+    @capacity = details['capacity'].to_i
+    @film_id = details['film_id'].to_i
   end
 
   def save()
@@ -53,5 +53,19 @@ class Screening
     values = [@screen, @start_time, @capacity, @film_id, @id]
     SqlRunner.run(sql, values)
   end
+
+  def tickets
+    sql = "SELECT tickets.*
+    FROM tickets
+    WHERE tickets.screening_id = $1;"
+    values = [@id]
+    items = SqlRunner.run(sql, values)
+    return Ticket.map_items(items)
+  end
+
+  def ticket_count
+    tickets.length
+  end
+
 
 end

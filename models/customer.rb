@@ -8,7 +8,7 @@ class Customer
   def initialize(details)
     @id = details['id'].to_i if details['id']
     @name = details['name']
-    @funds = details['funds']
+    @funds = details['funds'].to_i
   end
 
   def save()
@@ -77,22 +77,26 @@ class Customer
   end
 
   def count_tickets
-    results = tickets
-    results.length
+    tickets.length
   end
 
   def buy_ticket(screening)
-    sql = "SELECT films.*
-    FROM films
-    INNER JOIN screenings
-    ON screenings.film_id = films.id
-    WHERE film_id = $1;"
-    values = [screening.film_id]
-    items = SqlRunner.run(sql, values)
-    film = Film.map_items(items).first
-    @funds -= film.price
-    # should also add code to generate a new ticket for film / screening / customer
-    # and update database
+    if screening.ticket_count < screening.capacity
+      sql = "SELECT films.*
+      FROM films
+      INNER JOIN screenings
+      ON screenings.film_id = films.id
+      WHERE film_id = $1;"
+      values = [screening.film_id]
+      items = SqlRunner.run(sql, values)
+      film = Film.map_items(items).first
+      @funds -= film.price
+      update
+      new_ticket = Ticket.new({'customer_id' => @id, 'screening_id' => screening.id})
+      new_ticket.save
+    else
+      return "Screening at capacity"
+    end
   end
 
 
